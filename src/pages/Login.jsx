@@ -20,7 +20,6 @@ function Login({ setUser }) {
     <div className="login-container">
       <div className="login-box">
         <h1>Betting Nexa</h1>
-        <p className="subtitle">CAN Semi Finals 2026</p>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
