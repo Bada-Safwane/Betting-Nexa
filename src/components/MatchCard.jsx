@@ -1,3 +1,4 @@
+import Flag from './Flag'
 import '../styles/MatchCard.css'
 
 function MatchCard({ match, onClick }) {
@@ -7,12 +8,12 @@ function MatchCard({ match, onClick }) {
     <div className="match-card" onClick={onClick}>
       <div className="match-teams">
         <div className="team">
-          <div className="flag">{team1.flag}</div>
+          <Flag code={team1.flagCode} size="large" />
           <div className="team-name">{team1.name}</div>
         </div>
         <div className="vs">VS</div>
         <div className="team">
-          <div className="flag">{team2.flag}</div>
+          <Flag code={team2.flagCode} size="large" />
           <div className="team-name">{team2.name}</div>
         </div>
       </div>

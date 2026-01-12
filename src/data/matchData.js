@@ -7,11 +7,13 @@ export const matches = [
     team1: {
       name: 'Egypt',
       flag: '🇪🇬',
+      flagCode: 'eg',
       code: 'EGY'
     },
     team2: {
       name: 'Senegal',
       flag: '🇸🇳',
+      flagCode: 'sn',
       code: 'SEN'
     },
     stats: {
@@ -26,11 +28,13 @@ export const matches = [
     team1: {
       name: 'Nigeria',
       flag: '🇳🇬',
+      flagCode: 'ng',
       code: 'NGA'
     },
     team2: {
       name: 'Morocco',
       flag: '🇲🇦',
+      flagCode: 'ma',
       code: 'MAR'
     },
     stats: {

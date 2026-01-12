@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getMatchById, teamPlayers } from '../data/matchData'
+import Flag from '../components/Flag'
 import '../styles/BettingDetails.css'
 
 function BettingDetails({ user }) {
@@ -84,6 +85,24 @@ function BettingDetails({ user }) {
 
   const currentPlayers = selectedTeam ? teamPlayers[selectedTeam] : []
 
+  const getPlayerPosition = (index) => {
+    // Formation: 4-3-3 (GK, 4 defenders, 3 midfielders, 3 forwards)
+    const positions = [
+      { top: '90%', left: '50%' },  // Goalkeeper
+      { top: '75%', left: '15%' },  // Defender left
+      { top: '75%', left: '38%' },  // Defender center-left
+      { top: '75%', left: '62%' },  // Defender center-right
+      { top: '75%', left: '85%' },  // Defender right
+      { top: '50%', left: '25%' },  // Midfielder left
+      { top: '50%', left: '50%' },  // Midfielder center
+      { top: '50%', left: '75%' },  // Midfielder right
+      { top: '20%', left: '25%' },  // Forward left
+      { top: '15%', left: '50%' },  // Forward center
+      { top: '20%', left: '75%' },  // Forward right
+    ]
+    return positions[index] || { top: '50%', left: '50%' }
+  }
+
   return (
     <div className="betting-details-container">
       <header className="betting-header">
@@ -98,7 +117,7 @@ function BettingDetails({ user }) {
           className={`team-selector ${selectedTeam === match.team1.code ? 'selected' : ''} ${team1Prediction !== 'none' ? team1Prediction : ''}`}
           onClick={() => handleTeamSelect(match.team1.code)}
         >
-          <div className="flag-large">{match.team1.flag}</div>
+          <Flag code={match.team1.flagCode} size="xlarge" />
           <div className="team-name-large">{match.team1.name}</div>
           <div className="prediction-buttons">
             <button 
@@ -121,7 +140,7 @@ function BettingDetails({ user }) {
           className={`team-selector ${selectedTeam === match.team2.code ? 'selected' : ''} ${team2Prediction !== 'none' ? team2Prediction : ''}`}
           onClick={() => handleTeamSelect(match.team2.code)}
         >
-          <div className="flag-large">{match.team2.flag}</div>
+          <Flag code={match.team2.flagCode} size="xlarge" />
           <div className="team-name-large">{match.team2.name}</div>
           <div className="prediction-buttons">
             <button 
@@ -149,23 +168,26 @@ function BettingDetails({ user }) {
             <div className="field-line bottom"></div>
             <div className="center-circle"></div>
             
-            <div className="players-list">
-              {currentPlayers.map(player => (
-                <div 
-                  key={player.id}
-                  className={`player-item ${selectedPlayer?.id === player.id ? 'selected' : ''}`}
-                  onClick={() => handlePlayerSelect(player)}
-                >
-                  <div className="player-number">{player.number}</div>
-                  <div className="player-info">
-                    <div className="player-name">{player.name}</div>
-                    <div className="player-position">{player.position}</div>
+            <div className="players-formation">
+              {currentPlayers.slice(0, 11).map((player, index) => {
+                const position = getPlayerPosition(index)
+                return (
+                  <div 
+                    key={player.id}
+                    className={`player-dot ${selectedPlayer?.id === player.id ? 'selected' : ''}`}
+                    style={{ top: position.top, left: position.left }}
+                    onClick={() => handlePlayerSelect(player)}
+                  >
+                    <div className="player-circle">
+                      <span className="player-num">{player.number}</span>
+                      {playerScores[player.id] > 0 && (
+                        <div className="goal-badge">{playerScores[player.id]}</div>
+                      )}
+                    </div>
+                    <div className="player-label">{player.name}</div>
                   </div>
-                  {playerScores[player.id] > 0 && (
-                    <div className="player-score">⚽ {playerScores[player.id]}</div>
-                  )}
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 

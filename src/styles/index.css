@@ -24,10 +24,12 @@ body {
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
   color: var(--text-primary);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 #root {
   min-height: 100vh;
+  width: 100%;
 }
 
 .loading {
@@ -53,4 +55,20 @@ button:disabled {
 
 input {
   font-family: inherit;
+}
+
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }
