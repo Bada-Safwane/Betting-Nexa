@@ -1,0 +1,113 @@
+.match-card {
+  background: var(--secondary-color);
+  border-radius: 16px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.match-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 24px rgba(74, 144, 226, 0.3);
+}
+
+.match-teams {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flag {
+  font-size: 3.5rem;
+}
+
+.team-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.vs {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.match-stats h3 {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 60px;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.stat-bar {
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.stat-fill.team1 {
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+}
+
+.stat-fill.team2 {
+  background: linear-gradient(90deg, #e24a4a 0%, #bd3535 100%);
+}
+
+.stat-fill.draw {
+  background: linear-gradient(90deg, #808080 0%, #606060 100%);
+}
+
+.stat-value {
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.top-scorer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.top-scorer strong {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
