@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import BettingDetails from './pages/BettingDetails'
-import { getCurrentUser } from './utils/auth'
+import { getCurrentUser } from './utils/api'
 
 function App() {
   const [user, setUser] = useState(null)

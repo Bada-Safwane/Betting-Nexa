@@ -1,18 +1,33 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { login } from '../utils/auth'
+import { login } from '../utils/api'
 import '../styles/Login.css'
 
 function Login({ setUser }) {
-  const [firstName, setFirstName] = useState('')
+  const [username, setUsername] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (firstName.trim()) {
-      const user = login(firstName.trim())
+    setError('')
+
+    const trimmed = username.trim()
+    if (!trimmed) {
+      setError("Veuillez saisir un nom d'utilisateur")
+      return
+    }
+
+    try {
+      setLoading(true)
+      const user = await login(trimmed)
       setUser(user)
       navigate('/home')
+    } catch (err) {
+      setError(err.message || 'Erreur lors de la connexion')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -23,14 +38,15 @@ function Login({ setUser }) {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Enter your first name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="Entrez votre nom d'utilisateur"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className="login-input"
             autoFocus
           />
-          <button type="submit" className="login-button">
-            Continue
+          {error && <div className="login-error">{error}</div>}
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Connexion...' : 'Continuer'}
           </button>
         </form>
       </div>
